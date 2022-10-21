@@ -6,9 +6,8 @@ import fs from 'fs'
 //const cv = require('opencv4nodejs');
 
 const getPuzzleNotch = (bgPath, tpPath) => {
-
   const bg = cv.imread(bgPath, cv.IMREAD_UNCHANGED);
-  const bgAlpha = bg.cvtColor(cv.COLOR_BGR2RGBA)
+  const bgAlpha = bg.cvtColor(cv.COLOR_RGB2RGBA)
 
   const tp = cv.imread(tpPath);
   const tpAplha = cv.imread(tpPath, cv.IMREAD_UNCHANGED);
@@ -33,9 +32,9 @@ const getPuzzleNotch = (bgPath, tpPath) => {
   const bgAry = bgAlpha.getDataAsArray()
   const tpAry = tpAplha.getDataAsArray()
 
-  for(let i=0;i<tp.rows;i++){
-    for(let j=0;j<tp.cols;j++){
-      mergedImg.set(minLoc.y + j, minLoc.x + i, new cv.Vec4(parseInt(tpAry[j][i][0] * 0.3 + bgAry[minLoc.y + j][minLoc.x + i][0] * 0.7), parseInt(tpAry[j][i][1] * 0.3 + bgAry[minLoc.y + j][minLoc.x + i][1] * 0.7), parseInt(tpAry[j][i][2] * 0.3 + bgAry[minLoc.y + j][minLoc.x + i][2] * 0.7), 255))
+  for(let i=0; i<tp.rows; i++){
+    for(let j=0; j<tp.cols; j++){
+      mergedImg.set(minLoc.y + i, minLoc.x + j, new cv.Vec4(parseInt(tpAry[i][j][0] * 0.3 + bgAry[minLoc.y + i][minLoc.x + j][0] * 0.7), parseInt(tpAry[i][j][1] * 0.3 + bgAry[minLoc.y + i][minLoc.x + j][1] * 0.7), parseInt(tpAry[i][j][2] * 0.3 + bgAry[minLoc.y + i][minLoc.x + j][2] * 0.7), 255))
     }
   }
 
@@ -95,6 +94,6 @@ const slicePuzzle = async (page, loc) => {
   await page.mouse.up()
 }
 
-crackGeetest()
+//crackGeetest()
 
-//getPuzzleNotch('./bg.png', './tp.png')
+getPuzzleNotch('./bg.png', './tp.png')
