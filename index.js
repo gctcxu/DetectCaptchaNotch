@@ -3,7 +3,6 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth'
 import cv from 'opencv4nodejs'
 import { get } from 'https';
 import fs from 'fs'
-//const cv = require('opencv4nodejs');
 
 const getPuzzleNotch = (bgPath, tpPath) => {
   const bg = cv.imread(bgPath, cv.IMREAD_UNCHANGED);
